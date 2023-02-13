@@ -14,7 +14,7 @@ from testing import test
 model = VGG16() #to compile the model
 model.to(device) #to send the model for training on either cuda or cpu
 
-epochs = 50
+epochs = 5
 batch_size = 64
 lr = 1e-3
 milestones = [10, 15, 20, 25, 30, 35]

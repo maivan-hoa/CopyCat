@@ -12,4 +12,4 @@ CLASSES = {'Bien': 0,
            'Thang': 3,
            'Tung': 4}
 
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')

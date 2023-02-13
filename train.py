@@ -76,7 +76,7 @@ def train(train_loader, val_loader, model, epochs, batch_size, lr, path_save, mi
     plt.title('train and valid accuracy per epoch')
     plt.xlabel('Epoch')
     plt.ylabel('Accuracy')
-    plt.show()
+    plt.savefig('./snapshots/learning_curve_' + path_save.split('/')[-1].replace('pth', 'png'))
 
 
 def eval(model, dataloader):

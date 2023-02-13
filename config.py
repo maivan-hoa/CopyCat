@@ -6,10 +6,10 @@ Created on Tue Feb  7 11:07:59 2023
 """
 import torch
 
-CLASSES = {'bien': 0,
-           'dung': 1,
-           'long': 2,
-           'thang': 3,
-           'thanh': 4}
+CLASSES = {'Bien': 0,
+           'Minh': 1,
+           'Quyet': 2,
+           'Thang': 3,
+           'Tung': 4}
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')

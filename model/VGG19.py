@@ -7,16 +7,16 @@ Created on Tue Feb  7 11:10:50 2023
 import torch.nn as nn
 
 '''
-Kích thước ảnh đầu vào của VGG16 là 224x224x3
+Kích thước ảnh đầu vào của VGG19 là 224x224x3
 '''
 
-class VGG16(nn.Module):
+class VGG19(nn.Module):
     def __init__(self, num_classes):
-        super(VGG16, self).__init__()
+        super(VGG19, self).__init__()
+        
         self.layer1 = nn.Sequential(
             nn.Conv2d(3, 64, kernel_size=3, stride=1, padding=1),
             nn.BatchNorm2d(64),
-            # nn.Dropout(p=0.5),
             nn.ReLU())
         self.layer2 = nn.Sequential(
             nn.Conv2d(64, 64, kernel_size=3, stride=1, padding=1),
@@ -47,25 +47,22 @@ class VGG16(nn.Module):
         self.layer7 = nn.Sequential(
             nn.Conv2d(256, 256, kernel_size=3, stride=1, padding=1),
             nn.BatchNorm2d(256),
+            nn.ReLU())
+        self.layer8 = nn.Sequential(
+            nn.Conv2d(256, 256, kernel_size=3, stride=1, padding=1),
+            nn.BatchNorm2d(256),
             nn.ReLU(),
             nn.MaxPool2d(kernel_size = 2, stride = 2))
         
 
-        self.layer8 = nn.Sequential(
-            nn.Conv2d(256, 512, kernel_size=3, stride=1, padding=1),
-            nn.BatchNorm2d(512),
-            nn.ReLU())
         self.layer9 = nn.Sequential(
-            nn.Conv2d(512, 512, kernel_size=3, stride=1, padding=1),
+            nn.Conv2d(256, 512, kernel_size=3, stride=1, padding=1),
             nn.BatchNorm2d(512),
             nn.ReLU())
         self.layer10 = nn.Sequential(
             nn.Conv2d(512, 512, kernel_size=3, stride=1, padding=1),
             nn.BatchNorm2d(512),
-            nn.ReLU(),
-            nn.MaxPool2d(kernel_size = 2, stride = 2))
-        
-
+            nn.ReLU())
         self.layer11 = nn.Sequential(
             nn.Conv2d(512, 512, kernel_size=3, stride=1, padding=1),
             nn.BatchNorm2d(512),
@@ -73,8 +70,23 @@ class VGG16(nn.Module):
         self.layer12 = nn.Sequential(
             nn.Conv2d(512, 512, kernel_size=3, stride=1, padding=1),
             nn.BatchNorm2d(512),
-            nn.ReLU())
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size = 2, stride = 2))
+        
+
         self.layer13 = nn.Sequential(
+            nn.Conv2d(512, 512, kernel_size=3, stride=1, padding=1),
+            nn.BatchNorm2d(512),
+            nn.ReLU())
+        self.layer14 = nn.Sequential(
+            nn.Conv2d(512, 512, kernel_size=3, stride=1, padding=1),
+            nn.BatchNorm2d(512),
+            nn.ReLU())
+        self.layer15 = nn.Sequential(
+            nn.Conv2d(512, 512, kernel_size=3, stride=1, padding=1),
+            nn.BatchNorm2d(512),
+            nn.ReLU())
+        self.layer16 = nn.Sequential(
             nn.Conv2d(512, 512, kernel_size=3, stride=1, padding=1),
             nn.BatchNorm2d(512),
             nn.ReLU(),
@@ -97,19 +109,28 @@ class VGG16(nn.Module):
     def forward(self, x):
         out = self.layer1(x)
         out = self.layer2(out)
+
         out = self.layer3(out)
         out = self.layer4(out)
+
         out = self.layer5(out)
         out = self.layer6(out)
         out = self.layer7(out)
         out = self.layer8(out)
+
         out = self.layer9(out)
         out = self.layer10(out)
         out = self.layer11(out)
         out = self.layer12(out)
+
         out = self.layer13(out)
+        out = self.layer14(out)
+        out = self.layer15(out)
+        out = self.layer16(out)
+
         out = out.reshape(out.size(0), -1)
         out = self.fc(out)
         out = self.fc1(out)
         out = self.fc2(out)
+        
         return out

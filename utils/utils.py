@@ -5,6 +5,46 @@ Created on Tue Feb  7 11:54:18 2023
 @author: Mai Van Hoa - HUST
 """
 import numpy as np
+from config import *
+from PIL import Image
+import torchvision.transforms as transforms
+
+def get_image_transformation(image, trainsize=224):
+    img_transform = transforms.Compose(
+    [   
+        transforms.Resize((trainsize, trainsize)),
+        transforms.ToTensor(),
+        transforms.Normalize([0.485, 0.456, 0.406],
+                              [0.229, 0.224, 0.225])
+    ])
+
+
+    return img_transform(image)
+    
+
+def get_inverse_transformation(image):
+    img_transform = transforms.Normalize(
+      mean=[-0.485/0.229, -0.456/0.224, -0.406/0.255],  # INVERSE normalize images, according to https://pytorch.org/docs/stable/torchvision/models.html
+      std=[1/0.229, 1/0.224, 1/0.255]
+    )
+
+    return img_transform(image)
+
+
+def rgb_loader(path):
+    with open(path, 'rb') as f:
+        img = Image.open(f)
+        return img.convert('RGB')
+
+
+def load_model(model, path_to_model):
+    if str(device) == 'cpu':
+        model.load_state_dict(torch.load(path_to_model, map_location='cpu'))
+    else:
+        model.load_state_dict(torch.load(path_to_model))
+
+    model.to(device)
+    return model
 
 
 def lr_warmup_cosine_decay(global_step, # step hiện tại

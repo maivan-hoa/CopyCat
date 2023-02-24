@@ -1,0 +1,178 @@
+training VGG16 trên tập train_OD có thực hiện augmentation offline
+Augmentation offline tập PD_OL  --> Số lượng ảnh chuẩn bị cho trộm nhãn lớn hơn --> thực hiện trộm nhãn với ngưỡng 0.9,
+thu được tập PD_SL: 
+	Bien has 468 image
+	Thang has 161 image
+	Minh has 66 image
+	Tung has 287 image
+	Quyet has 8 image
+--> thực hiện cân bằng nhãn tập PD_SL với số ảnh yêu cầu là 500 (thực hiện ngẫu nhiên thay đổi gamma hoặc hflip)
+--> training VGG16 với tập PD_SL thu được độ chính xác 86.21% (25/29) với độ chính xác trung bình:
+	Bien: 1.0
+	Minh: 0.75
+	Quyet: 0.71
+	Thang: 0.83
+	Tung: 0.77
+############################################
+
+------> Hướng cần cải thiện: Khi thực hiện cân bằng nhãn trên tập PD_SL có thể không sử dụng thay đổi gamma (thay đổi gamma làm thay đổi phân phối của dữ liệu đã filter)
+			     Augmentation tập PD_OL để dữ liệu đa dạng hơn
+			     Sử dụng ngưỡng threshold_confidence cao hơn
+
+
+############################################
+training VGG16 trên tập train_OD có thực hiện augmentation offline
+Augmentation offline tập PD_OL  --> Số lượng ảnh chuẩn bị cho trộm nhãn lớn hơn --> thực hiện trộm nhãn với ngưỡng 0.9,
+thu được tập PD_SL: 
+	Bien has 468 image
+	Thang has 161 image
+	Minh has 66 image
+	Tung has 287 image
+	Quyet has 8 image
+--> thực hiện cân bằng nhãn tập PD_SL với số ảnh yêu cầu là 500 (chỉ thực hiện hflip)
+--> training VGG16 với tập PD_SL thu được độ chính xác 79.31% (23/29) với độ chính xác trung bình:
+	Bien: 1.0
+	Minh: 0.61
+	Quyet: 0.84
+	Thang: 0.84
+	Tung: 0.83
+
+############################################
+training VGG16 trên tập train_OD có thực hiện augmentation offline
+Augmentation offline tập PD_OL (có thêm center crop) --> Số lượng ảnh chuẩn bị cho trộm nhãn lớn hơn --> thực hiện trộm nhãn với ngưỡng 0.9,
+thu được tập PD_SL: 
+	Bien has 626image
+	Thang has 181 image
+	Minh has 87 image
+	Tung has 445 image
+	Quyet has 14 image
+--> thực hiện cân bằng nhãn tập PD_SL với số ảnh yêu cầu là 500 (hflip + gamma)
+--> training VGG16 với tập PD_SL thu được độ chính xác 96.55% (28/29) với độ chính xác trung bình:
+	Bien: 1.0
+	Minh: 0.91
+	Quyet: 0.97
+	Thang: 0.97
+	Tung: 0.7
+
+
+############################################
+training VGG16 trên tập train_OD có thực hiện augmentation offline
+Augmentation offline tập PD_OL (có thêm center crop) --> Số lượng ảnh chuẩn bị cho trộm nhãn lớn hơn --> thực hiện trộm nhãn với ngưỡng 0.9,
+thu được tập PD_SL: 
+	Bien has 626image
+	Thang has 181 image
+	Minh has 87 image
+	Tung has 445 image
+	Quyet has 14 image
+--> thực hiện cân bằng nhãn tập PD_SL với số ảnh yêu cầu là 500 (hflip + gamma)
+--> training VGG19 với tập PD_SL thu được độ chính xác 93.10% (27/29) với độ chính xác trung bình:
+	Bien: 1.0
+	Minh: 0.89
+	Quyet: 0.98
+	Thang: 0.98
+	Tung: 0.85
+
+
+#########################################
+training VGG16 trên tập train_OD có thực hiện augmentation offline
+Augmentation offline tập NPD_OL (có thêm center crop) --> Số lượng ảnh chuẩn bị cho trộm nhãn lớn hơn --> thực hiện trộm nhãn với ngưỡng 0.9,
+thu được tập NPD_SL: 
+Bien has 59730 image
+Minh has 3478 image
+Thang has 972 image
+Quyet has 98 image
+Tung has 178 image
+
+--> thực hiện cân bằng nhãn tập PD_SL với số ảnh yêu cầu là 1000 (hflip + gamma)
+--> training VGG16 với tập NPD_SL thu được độ chính xác 72.41% (21/29) với độ chính xác trung bình:
+Bien: 1.0
+Thang: 0.83
+Quyet: 0.88
+Minh: 0.42
+Tung: 0.93
+
+
+----------> Ảnh của Minh chiếm khá nhiều ảnh có độ tin cậy cao hơn 90%, nhưng độ chính xác lại thấp ---> Lý do ????
+
+training VGG16 trên tập train_OD có thực hiện augmentation offline
+Augmentation offline tập ImageNet_OL --> Số lượng ảnh chuẩn bị cho trộm nhãn lớn hơn --> thực hiện trộm nhãn với ngưỡng 0.9,
+
+--> thực hiện cân bằng nhãn tập ImageNet_SL với số ảnh yêu cầu là 1000 (hflip + gamma)
+--> training VGG19 với tập ImageNet_SL thu được độ chính xác 82.76% (24/29) với độ chính xác trung bình:
+Bien: 1.0
+Tung: 0.81
+Minh: 0.69
+Quyet: 0.98
+Thang: 0.97
+
+###########################################
+training VGG16 trên tập train_OD có thực hiện augmentation offline
+Augmentation offline tập ImageNet_OL --> Số lượng ảnh chuẩn bị cho trộm nhãn lớn hơn --> thực hiện trộm nhãn với ngưỡng 0.8,
+
+--> thực hiện cân bằng nhãn tập ImageNet_SL với số ảnh yêu cầu là 2500 (hflip + gamma)
+--> training VGG19 với tập ImageNet_SL thu được độ chính xác 96.55% (28/29) với độ chính xác trung bình:
+Bien: 1.0
+Minh: 0.83
+Quyet: 0.97
+Thang: 1.0
+Tung: 0.88
+
+###########################################
+training VGG16 trên tập train_OD có thực hiện augmentation offline
+Augmentation offline tập ImageNet_OL --> Số lượng ảnh chuẩn bị cho trộm nhãn lớn hơn --> thực hiện trộm nhãn với ngưỡng 0.8,
+
+--> thực hiện cân bằng nhãn tập ImageNet_SL với số ảnh yêu cầu là 2500 (hflip + gamma)
+--> training VGG16 với tập ImageNet_SL thu được độ chính xác 86.21% (25/29) với độ chính xác trung bình:
+Bien: 1.0
+Tung: 0.89
+Minh: 0.94
+Quyet: 0.96
+Thang: 1.0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

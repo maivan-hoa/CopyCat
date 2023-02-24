@@ -28,7 +28,7 @@ class FaceDataset(Dataset):
             X_train, X_val, y_train, y_val = train_test_split(self.images, self.labels,
                                                               stratify=self.labels, 
                                                               test_size=0.2,
-                                                              random_state=1)
+                                                              random_state=1234)
         if type_loader == 'train_loader':
             self.images = X_train
             self.labels = y_train
@@ -80,6 +80,7 @@ class FaceDataset_SL(Dataset):
     def __init__(self, image_root, trainsize):
         self.trainsize = trainsize
         self.images = glob.glob(image_root + '/*/*')
+        self.images = [f for f in self.images if f.endswith('.jpg') or f.endswith('.png') or f.endswith('.jpeg')]
         print('Number image stolen: ', len(self.images))
 
         self.size = len(self.images)
